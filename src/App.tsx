@@ -16,7 +16,7 @@ interface ClockState {
 
 class Clock extends Component<{ name: string }, ClockState> {
   state: ClockState = {
-    time: new Date().toLocaleTimeString('en-GB', { hour12: false }),
+    time: new Date().toUTCString().slice(-12, -4),
   };
 
   private timerId: NodeJS.Timeout | null = null;
@@ -24,7 +24,7 @@ class Clock extends Component<{ name: string }, ClockState> {
   componentDidMount() {
     this.timerId = setInterval(() => {
       this.setState(() => ({
-        time: new Date().toLocaleTimeString('en-GB', { hour12: false }),
+        time: new Date().toUTCString().slice(-12, -4),
       }));
       // eslint-disable-next-line no-console
       console.log(this.state.time);
